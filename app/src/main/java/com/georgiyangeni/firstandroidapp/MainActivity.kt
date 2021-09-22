@@ -2,91 +2,67 @@ package com.georgiyangeni.firstandroidapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import android.content.Intent
-import android.net.Uri
-import android.os.PersistableBundle
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.util.Log
+import androidx.activity.viewModels
+import androidx.core.view.isVisible
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.RecyclerView
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.georgiyangeni.firstandroidapp.databinding.ActivityMainBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
+class MainActivity : AppCompatActivity() {
 
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val recyclerView = findViewById<RecyclerView>(R.id.usersRecyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        val adapter = UserAdapter()
-        recyclerView.adapter = adapter
-        adapter.userList = loadUsers()
-        adapter.notifyDataSetChanged()  // will come back to this later
+    companion object {
+        val LOG_TAG = "MyLogTag"
     }
 
-    private fun loadUsers(): List<User> {
-        return listOf(
-            User(
-                avatarUrl = "",
-                userName = "User name 1",
-                groupName = "A"
-            ),
-            User(
-                avatarUrl = "",
-                userName = "User name 2",
-                groupName = "AB"
-            ),
-            User(
-                avatarUrl = "",
-                userName = "User name 3",
-                groupName = "CA"
-            ),
-            User(
-                avatarUrl = "",
-                userName = "User name 4",
-                groupName = "DB"
-            ),
-            User(
-                avatarUrl = "",
-                userName = "User name 5",
-                groupName = "BA"
-            ),
-            User(
-                avatarUrl = "",
-                userName = "User name 6",
-                groupName = "C"
-            ),
-            User(
-                avatarUrl = "",
-                userName = "User name 7",
-                groupName = "D"
-            ),
-            User(
-                avatarUrl = "",
-                userName = "User name 8",
-                groupName = "AE"
-            ),
-            User(
-                avatarUrl = "",
-                userName = "User name 9",
-                groupName = "Sausage school"
-            )
-        )
-}
+    private val viewModel: MainViewModel by viewModels()
 
-//class MainActivity : AppCompatActivity() {
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
-//    }
+    private val viewBinding by viewBinding(ActivityMainBinding::bind)
 
-//    fun onFirstButtonClick(view: View?) {
-//        if (view != null) {
-//            if (view.id == R.id.first_button) {
-//                val uri: Uri =
-//                    Uri.parse("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-//
-//                val intent = Intent(Intent.ACTION_VIEW, uri)
-//                startActivity(intent)
-//            }
-//        }
-//    }
+    // why not?
+    // private var adapter: UserAdapter - and use adapter instead of casting in renderViewState
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d(LOG_TAG, "onCreate()")
+        setContentView(R.layout.activity_main)
+        setupRecyclerView()
+
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.viewState.collect { viewState ->
+                    renderViewState(viewState)
+                }
+            }
+        }
+    }
+
+    private fun renderViewState(viewState: MainViewModel.ViewState) {
+        when (viewState) {
+            is MainViewModel.ViewState.Loading -> {
+                viewBinding.usersRecyclerView.isVisible = false
+                viewBinding.progressBar.isVisible = true
+            }
+            is MainViewModel.ViewState.Data -> {
+                viewBinding.usersRecyclerView.isVisible = true
+                (viewBinding.usersRecyclerView.adapter as UserAdapter).apply {
+                    userList = viewState.userList
+                    notifyDataSetChanged()
+                }
+                viewBinding.progressBar.isVisible = false
+            }
+        }
+    }
+
+    private fun setupRecyclerView(): UserAdapter {
+        val recyclerView = findViewById<RecyclerView>(R.id.usersRecyclerView)
+        val adapter = UserAdapter()
+        recyclerView.adapter = adapter
+        return adapter
+    }
 }
