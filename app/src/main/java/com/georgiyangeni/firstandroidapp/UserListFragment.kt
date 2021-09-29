@@ -31,9 +31,10 @@ class UserListFragment : Fragment(R.layout.fragment_userlist) {
 
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.viewState.collect { viewState ->
-                    renderViewState(viewState)
-                }
+//                viewModel.viewState.collect { viewState ->
+//                    renderViewState(viewState)
+//                }
+                viewModel.viewState.collect(::renderViewState)
             }
         }
     }
@@ -56,9 +57,12 @@ class UserListFragment : Fragment(R.layout.fragment_userlist) {
     }
 
     private fun setupRecyclerView(): UserAdapter {
-        val recyclerView = viewBinding.usersRecyclerView
-        val adapter = UserAdapter()
-        recyclerView.adapter = adapter
+//        val recyclerView = viewBinding.usersRecyclerView
+//        val adapter = UserAdapter()
+//        recyclerView.adapter = adapter
+        val adapter = UserAdapter().also {
+            viewBinding.usersRecyclerView.adapter = it
+        }
         return adapter
     }
 }
