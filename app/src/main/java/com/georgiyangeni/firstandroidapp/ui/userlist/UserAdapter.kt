@@ -1,4 +1,4 @@
-package com.georgiyangeni.firstandroidapp
+package com.georgiyangeni.firstandroidapp.ui.userlist
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.georgiyangeni.firstandroidapp.R
+import com.georgiyangeni.firstandroidapp.entity.User
 
 class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 

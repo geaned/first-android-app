@@ -1,20 +1,21 @@
-package com.georgiyangeni.firstandroidapp
+package com.georgiyangeni.firstandroidapp.ui.userlist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.georgiyangeni.firstandroidapp.ui.base.BaseFragment
+import com.georgiyangeni.firstandroidapp.ui.MainViewModel
+import com.georgiyangeni.firstandroidapp.R
 import com.georgiyangeni.firstandroidapp.databinding.FragmentUserlistBinding
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class UserListFragment : Fragment(R.layout.fragment_userlist) {
+class UserListFragment : BaseFragment(R.layout.fragment_userlist) {
 
     private lateinit var viewModel: MainViewModel
 
@@ -29,8 +30,8 @@ class UserListFragment : Fragment(R.layout.fragment_userlist) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
 
-        lifecycleScope.launch {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
 //                viewModel.viewState.collect { viewState ->
 //                    renderViewState(viewState)
 //                }

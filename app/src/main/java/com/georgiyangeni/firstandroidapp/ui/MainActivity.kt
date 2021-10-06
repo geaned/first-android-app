@@ -1,8 +1,9 @@
-package com.georgiyangeni.firstandroidapp
+package com.georgiyangeni.firstandroidapp.ui
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.georgiyangeni.firstandroidapp.R
 
 class MainActivity : AppCompatActivity() {
 

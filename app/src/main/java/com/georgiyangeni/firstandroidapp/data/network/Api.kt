@@ -1,5 +1,6 @@
 package com.georgiyangeni.firstandroidapp
 
+import com.georgiyangeni.firstandroidapp.entity.User
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import retrofit2.http.GET

@@ -1,8 +1,10 @@
-package com.georgiyangeni.firstandroidapp
+package com.georgiyangeni.firstandroidapp.ui
 
 import android.util.Log
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.georgiyangeni.firstandroidapp.Api
+import com.georgiyangeni.firstandroidapp.ui.base.BaseViewModel
+import com.georgiyangeni.firstandroidapp.entity.User
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -14,7 +16,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class MainViewModel : ViewModel() {
+class MainViewModel : BaseViewModel() {
 
     companion object {
         val LOG_TAG = "MyLogTag"

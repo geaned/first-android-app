@@ -1,4 +1,4 @@
-package com.georgiyangeni.firstandroidapp
+package com.georgiyangeni.firstandroidapp.ui.onboarding
 
 import android.os.Bundle
 import android.view.View
@@ -6,7 +6,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.georgiyangeni.firstandroidapp.R
 import com.georgiyangeni.firstandroidapp.databinding.FragmentOnboardingBinding
+import com.georgiyangeni.firstandroidapp.onboardingTextAdapterDelegate
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
