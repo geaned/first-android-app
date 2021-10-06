@@ -1,12 +1,17 @@
 package com.georgiyangeni.firstandroidapp.ui.userlist
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.georgiyangeni.firstandroidapp.ui.base.BaseFragment
 import com.georgiyangeni.firstandroidapp.ui.MainViewModel
@@ -63,6 +68,11 @@ class UserListFragment : BaseFragment(R.layout.fragment_userlist) {
 //        recyclerView.adapter = adapter
         val adapter = UserAdapter().also {
             viewBinding.usersRecyclerView.adapter = it
+        }
+        ContextCompat.getDrawable(requireContext(), R.drawable.userlist_gradient_separator)?.let { drawable ->
+            UserListItemSeparator(drawable)
+        }?.let { itemDecoration ->
+            viewBinding.usersRecyclerView.addItemDecoration(itemDecoration)
         }
         return adapter
     }
