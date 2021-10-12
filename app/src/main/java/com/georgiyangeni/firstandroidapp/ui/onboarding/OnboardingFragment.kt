@@ -22,6 +22,8 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
     private val viewBinding by viewBinding(FragmentOnboardingBinding::bind)
     private var player: ExoPlayer? = null
 
+    private var isSoundOn: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         player = SimpleExoPlayer.Builder(requireContext()).build().apply {
@@ -34,6 +36,8 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.playerView.player = player
+        player?.volume = 0f
+
         viewBinding.viewPager.setTextPages()
         viewBinding.viewPager.attachDots(viewBinding.onboaringTextTabLayout)
         viewBinding.signInButton.setOnClickListener {
@@ -44,6 +48,10 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
         viewBinding.signUpButton.setOnClickListener {
             // TODO: sign up navigation (SignUpFragment)
             Toast.makeText(requireContext(), "Нажата кнопка зарегистрироваться", Toast.LENGTH_SHORT).show()
+        }
+
+        viewBinding.volumeControlButton.setOnClickListener {
+            changeVolumeStatus()
         }
     }
 
@@ -76,5 +84,17 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
 
     private fun ViewPager2.attachDots(tabLayout: TabLayout) {
         TabLayoutMediator(tabLayout, this) { _, _ -> }.attach()
+    }
+
+    private fun changeVolumeStatus() {
+        isSoundOn = !isSoundOn
+
+        if (isSoundOn) {
+            player?.volume = 1f
+            viewBinding.volumeControlButton.setImageResource(R.drawable.ic_volume_up_white_24dp)
+        } else {
+            player?.volume = 0f
+            viewBinding.volumeControlButton.setImageResource(R.drawable.ic_volume_down_white_24dp)
+        }
     }
 }
