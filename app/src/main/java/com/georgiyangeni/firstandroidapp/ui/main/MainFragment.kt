@@ -10,5 +10,5 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
 
     private val viewBinding by viewBinding(FragmentMainBinding::bind)
 
-    private val viewModel: MainFragmentViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
 }

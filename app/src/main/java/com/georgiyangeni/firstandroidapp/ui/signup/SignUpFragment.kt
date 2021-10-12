@@ -11,5 +11,5 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
 
     private val viewBinding by viewBinding(FragmentSignUpBinding::bind)
 
-    private val viewModel: SignInViewModel by viewModels()
+    private val viewModel: SignUpViewModel by viewModels()
 }

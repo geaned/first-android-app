@@ -23,7 +23,7 @@ class UserListItemSeparator(private val dividerDrawable: Drawable) : RecyclerVie
 
     override fun onDraw(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         parent.adapter?.let { adapter ->
-            parent.children // Displayed children on screen
+            parent.children
                 .forEach { view ->
                     val childAdapterPosition = parent.getChildAdapterPosition(view).let {
                         if (it == RecyclerView.NO_POSITION) return else it
