@@ -10,7 +10,8 @@ object AuthRepository {
     val isAuthorizedFlow = _isAuthorizedFlow.asStateFlow()
     // one-directional data flow, should not be able to write while reading
 
-    suspend fun signIn() {
+    suspend fun signIn(email: String, password: String) {
+        // TODO: http request to backend for auth
         _isAuthorizedFlow.emit(true)
     }
 
