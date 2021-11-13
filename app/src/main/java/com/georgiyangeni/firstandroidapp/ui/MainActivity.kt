@@ -3,6 +3,7 @@ package com.georgiyangeni.firstandroidapp.ui
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         subscribeToAuthorizationStatus()
         Timber.d("onCreate()")
     }
@@ -45,13 +47,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         val navController = findNavController(R.id.mainActivityNavigationHost)
         when (isAuthorized) {
             true -> {
-                if (navController.backQueue.any { it.destination.id == R.id.registered_user_nav_graph}) {
+                if (navController.backQueue.any { it.destination.id == R.id.registered_user_nav_graph }) {
                     return
                 }
                 navController.navigate(R.id.action_RegisteredUserNavGraph)
             }
             false -> {
-                if (navController.backQueue.any { it.destination.id == R.id.guest_nav_graph}) {
+                if (navController.backQueue.any { it.destination.id == R.id.guest_nav_graph }) {
                     return
                 }
                 navController.navigate(R.id.action_GuestNavGraph)

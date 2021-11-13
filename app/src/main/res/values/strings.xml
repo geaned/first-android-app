@@ -22,4 +22,9 @@
     <string name="sign_up_lastname_text_layout_hint">Фамилия</string>
     <string name="sign_up_firstname_text_layout_hint">Имя</string>
     <string name="sign_up_sign_up_button_text">Зарегистрироваться</string>
+    <string name="email_confirmation_text">Код подтверждения выслан вам на почту</string>
+    <string name="confirm_code_text">Подтвердить код</string>
+    <string name="open_mail_application_text">Открыть почту</string>
+    <string name="resend_confirmation_code_template">Выслать код повторно</string>
+    <string name="resend_confirmation_code_timer_template">Выслать код повторно можно будет через N секунд</string>
 </resources>
