@@ -18,6 +18,9 @@ class EmailConfirmationFragment : BaseFragment(R.layout.fragment_email_confirmat
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewBinding.backButton.applyInsetter {
+            type(statusBars = true) { margin() }
+        }
         viewBinding.emailConfirmationButtons.applyInsetter {
             type(navigationBars = true) { margin() }
         }

@@ -11,8 +11,8 @@ import androidx.navigation.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.georgiyangeni.firstandroidapp.R
 import com.georgiyangeni.firstandroidapp.databinding.ActivityMainBinding
+import com.georgiyangeni.firstandroidapp.ui.main.MainFragmentViewModel
 import kotlinx.coroutines.flow.collect
-import com.georgiyangeni.firstandroidapp.ui.main.MainViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private val viewBinding by viewBinding(ActivityMainBinding::bind)
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainFragmentViewModel by viewModels()
 
     companion object {
         val LOG_TAG = "MyLogTag"
