@@ -8,18 +8,24 @@ import com.georgiyangeni.firstandroidapp.data.network.response.error.CreateProfi
 import com.georgiyangeni.firstandroidapp.data.network.response.error.RefreshAuthTokensErrorResponse
 import com.georgiyangeni.firstandroidapp.data.network.response.error.SignInWithEmailErrorResponse
 import com.georgiyangeni.firstandroidapp.data.persistent.LocalKeyValueStorage
+import com.georgiyangeni.firstandroidapp.di.AppCoroutineScope
+import com.georgiyangeni.firstandroidapp.di.IoCoroutineDispatcher
 import com.georgiyangeni.firstandroidapp.entity.AuthTokens
 import com.haroldadmin.cnradapter.NetworkResponse
+import dagger.Lazy
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import timber.log.Timber
+import javax.inject.Inject
 
-class AuthRepository constructor(
-    private val api: Api,
+class AuthRepository @Inject constructor(
+    private val apiLazy: Lazy<Api>,
     private val localKeyValueStorage: LocalKeyValueStorage,
-    externalCoroutineScope: CoroutineScope,
-    private val ioDispatcher: CoroutineDispatcher
+    @AppCoroutineScope externalCoroutineScope: CoroutineScope,
+    @IoCoroutineDispatcher private val ioDispatcher: CoroutineDispatcher
 ) {
+
+    private val api by lazy { apiLazy.get() }
 
     private val authTokensFlow: Deferred<MutableStateFlow<AuthTokens?>> =
         externalCoroutineScope.async(context = ioDispatcher, start = CoroutineStart.LAZY) {

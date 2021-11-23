@@ -27,4 +27,5 @@
     <string name="open_mail_application_text">Открыть почту</string>
     <string name="resend_confirmation_code_template">Выслать код повторно</string>
     <string name="resend_confirmation_code_timer_template">Выслать код повторно можно будет через N секунд</string>
+    <string name="news_toolbar_title">Новости</string>
 </resources>

@@ -43,6 +43,9 @@ interface Api {
     suspend fun createProfile(
         @Body request: CreateProfileRequest
     ): NetworkResponse<AuthTokens, CreateProfileErrorResponse>
+
+//    @POST("posts")
+//    suspend fun getPosts(): NetworkResponse<GetPostsResponse, Unit>
 }
 
 @JsonClass(generateAdapter = true)

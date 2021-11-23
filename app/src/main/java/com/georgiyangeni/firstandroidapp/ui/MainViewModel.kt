@@ -8,7 +8,9 @@ import com.georgiyangeni.firstandroidapp.data.network.Api
 import com.georgiyangeni.firstandroidapp.data.network.MockApi
 import com.georgiyangeni.firstandroidapp.ui.base.BaseViewModel
 import com.georgiyangeni.firstandroidapp.entity.User
+import com.georgiyangeni.firstandroidapp.interactor.AuthInteractor
 import com.squareup.moshi.Moshi
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,12 +22,18 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import timber.log.Timber
+import javax.inject.Inject
 
-class MainViewModel : BaseViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val authInteractor: AuthInteractor
+): BaseViewModel() {
 
     companion object {
         val LOG_TAG = "MyLogTag"
     }
+
+    suspend fun isAuthorizedFlow(): Flow<Boolean> = authInteractor.isAuthorized()
 
     sealed class ViewState {
         object Loading : ViewState()
@@ -46,7 +54,8 @@ class MainViewModel : BaseViewModel() {
     private suspend fun loadUsers(): List<User> {
         return withContext(Dispatchers.IO) {
             Timber.d("loadUsers()")
-            // Thread.sleep(3000)  // for progress bar testing
+            // for progress bar testing
+            // Thread.sleep(3000)
             provideApi().getUsers().data
         }
     }

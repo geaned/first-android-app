@@ -6,8 +6,9 @@ import com.georgiyangeni.firstandroidapp.repository.AuthRepository
 import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
+import javax.inject.Inject
 
-class AuthInteractor constructor(
+class AuthInteractor @Inject constructor(
     private val authRepository: AuthRepository
 ) {
 
