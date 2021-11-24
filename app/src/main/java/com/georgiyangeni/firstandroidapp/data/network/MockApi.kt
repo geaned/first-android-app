@@ -6,11 +6,14 @@ import com.georgiyangeni.firstandroidapp.data.network.request.SignInWithEmailReq
 import com.georgiyangeni.firstandroidapp.data.network.response.VerificationTokenResponse
 import com.georgiyangeni.firstandroidapp.data.network.response.error.*
 import com.georgiyangeni.firstandroidapp.entity.AuthTokens
+import com.georgiyangeni.firstandroidapp.entity.User
 import com.haroldadmin.cnradapter.NetworkResponse
 
 class MockApi : Api {
     override suspend fun getUsers(): GetUsersResponse {
-        TODO("Not yet implemented")
+        return GetUsersResponse(
+                emptyList()
+            )
     }
 
     override suspend fun signInWithEmail(request: SignInWithEmailRequest): NetworkResponse<AuthTokens, SignInWithEmailErrorResponse> {
