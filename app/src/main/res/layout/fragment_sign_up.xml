@@ -60,6 +60,8 @@
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="32dp"
         android:hint="@string/sign_up_nickname_text_layout_hint"
+        app:helperTextEnabled="true"
+        app:helperText="Будет видно другим пользователям"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lastnameTextInputLayout">
@@ -79,6 +81,8 @@
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="32dp"
         android:hint="@string/sign_in_email_text_layout_hint"
+        app:helperTextEnabled="true"
+        app:helperText="Будет видна только вам"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nicknameTextInputLayout">

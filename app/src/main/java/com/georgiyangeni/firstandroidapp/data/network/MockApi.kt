@@ -10,10 +10,20 @@ import com.georgiyangeni.firstandroidapp.entity.User
 import com.haroldadmin.cnradapter.NetworkResponse
 
 class MockApi : Api {
-    override suspend fun getUsers(): GetUsersResponse {
-        return GetUsersResponse(
-                emptyList()
-            )
+    override suspend fun getUsers(): NetworkResponse<List<User>, Unit> {
+        return NetworkResponse.Success(
+            body = listOf(
+                User(
+                    id = 1,
+                    userName = "The Nameless Pharaoh",
+                    avatarUrl = "https://i.imgur.com/3EePCZN.png",
+                    firstName = "Yugi",
+                    lastName = "Muto",
+                    groupName = "King of Games"
+                )
+            ),
+            code = 200
+        )
     }
 
     override suspend fun signInWithEmail(request: SignInWithEmailRequest): NetworkResponse<AuthTokens, SignInWithEmailErrorResponse> {

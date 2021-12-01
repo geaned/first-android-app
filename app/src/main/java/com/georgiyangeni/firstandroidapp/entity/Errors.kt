@@ -7,7 +7,6 @@ import com.squareup.moshi.JsonClass
 data class Error(
     @Json(name = "code") val code: ErrorCode,
     @Json(name = "message") val message: String
-
 )
 
 enum class ErrorCode {

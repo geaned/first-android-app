@@ -17,9 +17,12 @@ import com.georgiyangeni.firstandroidapp.ui.base.BaseFragment
 import com.georgiyangeni.firstandroidapp.ui.MainViewModel
 import com.georgiyangeni.firstandroidapp.R
 import com.georgiyangeni.firstandroidapp.databinding.FragmentUserlistBinding
+import dagger.hilt.android.AndroidEntryPoint
+import dev.chrisbanes.insetter.applyInsetter
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class UserListFragment : BaseFragment(R.layout.fragment_userlist) {
 
     private lateinit var viewModel: UserListViewModel
@@ -33,6 +36,9 @@ class UserListFragment : BaseFragment(R.layout.fragment_userlist) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewBinding.usersRecyclerView.applyInsetter {
+            type(statusBars = true) { margin() }
+        }
         setupRecyclerView()
 
         viewLifecycleOwner.lifecycleScope.launch {

@@ -28,4 +28,6 @@
     <string name="resend_confirmation_code_template">Выслать код повторно</string>
     <string name="resend_confirmation_code_timer_template">Выслать код повторно можно будет через N секунд</string>
     <string name="news_toolbar_title">Новости</string>
+    <string name="profile_logout_button_text">Выйти</string>
+    <string name="logout_error_message">Что-то пошло не так</string>
 </resources>
