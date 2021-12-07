@@ -2,9 +2,10 @@ package com.georgiyangeni.firstandroidapp.ui.onboarding
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.georgiyangeni.firstandroidapp.R
@@ -47,8 +48,22 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
         viewBinding.playerView.player = player
         player?.volume = 0f
 
-        viewBinding.viewPager.setTextPages()
-        viewBinding.viewPager.attachDots(viewBinding.onboaringTextTabLayout)
+        viewBinding.viewPager.apply {
+            setTextPages()
+            removeOverScroll()
+            attachDots(viewBinding.onboaringTextTabLayout)
+
+            clipToPadding = false
+            clipChildren = false
+            offscreenPageLimit = 2
+
+            setPageTransformer(
+                MarginPageTransformer(
+                    resources.getDimensionPixelSize(R.dimen.onboarding_viewpager_page_margin)
+                )
+            )
+        }
+
         viewBinding.signInButton.setOnClickListener {
             findNavController().navigate(R.id.action_onboardingFragment_to_signInFragment)
         }
@@ -75,6 +90,10 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
     override fun onDestroy() {
         super.onDestroy()
         player?.release()
+    }
+
+    private fun ViewPager2.removeOverScroll() {
+        (getChildAt(0) as? RecyclerView)?.overScrollMode = View.OVER_SCROLL_NEVER
     }
 
     private fun ViewPager2.setTextPages() {
