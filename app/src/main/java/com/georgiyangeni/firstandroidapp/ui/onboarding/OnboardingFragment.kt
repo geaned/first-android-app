@@ -1,10 +1,15 @@
 package com.georgiyangeni.firstandroidapp.ui.onboarding
 
+import android.app.Activity
 import android.os.Bundle
+import android.util.Log
+import android.view.DragEvent
+import android.view.MotionEvent
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.georgiyangeni.firstandroidapp.R
@@ -18,6 +23,9 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import dev.chrisbanes.insetter.applyInsetter
+import timber.log.Timber
+import java.util.*
+import kotlin.concurrent.timer
 
 class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
 
@@ -25,6 +33,7 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
     private var player: ExoPlayer? = null
 
     private var isSoundOn: Boolean = false
+    private var switchPageHalt: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,8 +56,34 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
         viewBinding.playerView.player = player
         player?.volume = 0f
 
-        viewBinding.viewPager.setTextPages()
-        viewBinding.viewPager.attachDots(viewBinding.onboaringTextTabLayout)
+        viewBinding.viewPager.apply {
+            setTextPages()
+            removeOverScroll()
+            attachDots(viewBinding.onboaringTextTabLayout)
+
+            clipToPadding = false
+            clipChildren = false
+            offscreenPageLimit = 2
+
+            setPageTransformer(
+                MarginPageTransformer(
+                    resources.getDimensionPixelSize(R.dimen.onboarding_viewpager_page_margin)
+                )
+            )
+
+            Timer().scheduleAtFixedRate(
+                object: TimerTask() {
+                    override fun run() {
+                        (context as Activity).runOnUiThread {
+                            currentItem += 1
+                        }
+                    }
+                },
+                4000,
+                4000
+            )
+        }
+
         viewBinding.signInButton.setOnClickListener {
             findNavController().navigate(R.id.action_onboardingFragment_to_signInFragment)
         }
@@ -75,6 +110,10 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
     override fun onDestroy() {
         super.onDestroy()
         player?.release()
+    }
+
+    private fun ViewPager2.removeOverScroll() {
+        (getChildAt(0) as? RecyclerView)?.overScrollMode = View.OVER_SCROLL_NEVER
     }
 
     private fun ViewPager2.setTextPages() {
