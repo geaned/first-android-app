@@ -11,11 +11,13 @@ import androidx.navigation.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.georgiyangeni.firstandroidapp.R
 import com.georgiyangeni.firstandroidapp.databinding.ActivityMainBinding
+import com.georgiyangeni.firstandroidapp.ui.main.MainFragmentViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import com.georgiyangeni.firstandroidapp.ui.main.MainViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private val viewBinding by viewBinding(ActivityMainBinding::bind)
@@ -36,7 +38,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private fun subscribeToAuthorizationStatus() {
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.isAuthorizedFlow.collect {
+                viewModel.isAuthorizedFlow().collect {
                     showSuitableNavigationFlow(it)
                 }
             }

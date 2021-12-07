@@ -27,10 +27,12 @@ import com.georgiyangeni.firstandroidapp.R
 import com.georgiyangeni.firstandroidapp.databinding.FragmentSignUpBinding
 import com.georgiyangeni.firstandroidapp.ui.signin.SignInViewModel
 import com.georgiyangeni.firstandroidapp.util.getSpannedString
+import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.applyInsetter
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collect
 
+@AndroidEntryPoint
 class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
     private val viewModel: SignUpViewModel by viewModels()
     private val viewBinding by viewBinding(FragmentSignUpBinding::bind)
@@ -49,6 +51,9 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewBinding.backSignUpButton.applyInsetter {
+            type(statusBars = true) { margin() }
+        }
         viewBinding.signUpButton.applyInsetter {
             type(navigationBars = true) { margin() }
         }

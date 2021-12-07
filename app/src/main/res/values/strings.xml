@@ -1,3 +1,7 @@
+<!DOCTYPE resources [
+    <!-- Non-breaking space, U+00A0. -->
+    <!ENTITY nbsp "&#160;">
+    ]>
 <resources>
     <string name="app_name">First Android App</string>
     <string name="onboarding_view_pager_text_1">Осень 2021 г., СПбГУ</string>
@@ -27,4 +31,7 @@
     <string name="open_mail_application_text">Открыть почту</string>
     <string name="resend_confirmation_code_template">Выслать код повторно</string>
     <string name="resend_confirmation_code_timer_template">Выслать код повторно можно будет через N секунд</string>
+    <string name="news_toolbar_title">Новости</string>
+    <string name="profile_logout_button_text">Выйти</string>
+    <string name="logout_error_message">Что-то пошло не так</string>
 </resources>
