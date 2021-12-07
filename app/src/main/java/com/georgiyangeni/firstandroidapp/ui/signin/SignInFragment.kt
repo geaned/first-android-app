@@ -1,8 +1,10 @@
 package com.georgiyangeni.firstandroidapp.ui.signin
 
+import android.animation.ObjectAnimator
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
 import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
@@ -52,6 +54,12 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
             )
         }
         subscribeToFormFields()
+
+        ObjectAnimator.ofFloat(viewBinding.mknLogoImageView, "rotation", 0F, 360F)
+            .setDuration(10000)
+            .apply {
+                repeatCount = Animation.INFINITE
+            }.start()
     }
 
     private fun subscribeToFormFields() {
