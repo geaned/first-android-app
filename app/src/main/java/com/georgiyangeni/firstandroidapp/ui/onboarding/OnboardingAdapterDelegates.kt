@@ -1,4 +1,4 @@
-package com.georgiyangeni.firstandroidapp
+package com.georgiyangeni.firstandroidapp.ui.onboarding
 
 import com.georgiyangeni.firstandroidapp.databinding.ItemOnboardingTextBinding
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
