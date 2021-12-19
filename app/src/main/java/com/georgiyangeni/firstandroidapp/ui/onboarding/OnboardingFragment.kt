@@ -2,9 +2,6 @@ package com.georgiyangeni.firstandroidapp.ui.onboarding
 
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
-import android.view.DragEvent
-import android.view.MotionEvent
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -14,7 +11,7 @@ import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.georgiyangeni.firstandroidapp.R
 import com.georgiyangeni.firstandroidapp.databinding.FragmentOnboardingBinding
-import com.georgiyangeni.firstandroidapp.onboardingTextAdapterDelegate
+import com.georgiyangeni.firstandroidapp.ui.onboarding.onboardingTextAdapterDelegate
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
@@ -25,7 +22,6 @@ import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import dev.chrisbanes.insetter.applyInsetter
 import timber.log.Timber
 import java.util.*
-import kotlin.concurrent.timer
 
 class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
 

@@ -17,7 +17,7 @@ class NewsFragment : BaseFragment(R.layout.fragment_news) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewBinding.swipeLayoutNewsRecyclerView.applyInsetter {
+        viewBinding.toolbar.applyInsetter {
             type(statusBars = true) { margin() }
         }
     }
