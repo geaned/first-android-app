@@ -80,6 +80,7 @@
 
         <Button
             android:id="@+id/confirmCodeButton"
+            style="@style/Widget.OurAwesomeApp.UpperButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
@@ -91,6 +92,7 @@
 
         <Button
             android:id="@+id/openMailApplicationButton"
+            style="@style/Widget.OurAwesomeApp.LowerButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"

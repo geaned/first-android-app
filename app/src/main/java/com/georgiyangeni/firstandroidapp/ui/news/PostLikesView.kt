@@ -43,7 +43,7 @@ class PostLikesView @JvmOverloads constructor(
     private var circleBorderPaint: Paint =
         Paint()
             .apply {
-                color = context.getCompatColor(R.color.color_post_like_border)
+                color = context.getCompatColor(R.color.brand_orange)
                 strokeWidth = dpToPx(2f)
                 style = Paint.Style.STROKE
             }

@@ -12,6 +12,14 @@
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
     </style>
+    <style name="Widget.OurAwesomeApp.UpperButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/brand_orange</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="Widget.OurAwesomeApp.LowerButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/brand_turquoise</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
     <style name="Widget.OurAwesomeApp.LinkButton" parent="Widget.MaterialComponents.Button">
         <item name="android:background">?attr/selectableItemBackground</item>
         <item name="android:gravity">center</item>
