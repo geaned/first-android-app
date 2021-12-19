@@ -36,4 +36,5 @@
     <string name="logout_error_message">Что-то пошло не так</string>
     <string name="common_counter_prefix">+%1$d</string>
     <string name="confirmation_code_timer_template">"Выслать код повторно можно будет через %1$d секунд"</string>
+    <string name="resend_confirmation_code_message">Вы можете запросить повторную отправку кода</string>
 </resources>

@@ -12,6 +12,7 @@ import com.georgiyangeni.firstandroidapp.ui.base.BaseFragment
 import com.georgiyangeni.firstandroidapp.R
 import com.georgiyangeni.firstandroidapp.databinding.FragmentEmailConfirmationBinding
 import dev.chrisbanes.insetter.applyInsetter
+import kotlinx.coroutines.NonCancellable.cancel
 import org.w3c.dom.Text
 
 class EmailConfirmationFragment : BaseFragment(R.layout.fragment_email_confirmation) {
@@ -19,6 +20,8 @@ class EmailConfirmationFragment : BaseFragment(R.layout.fragment_email_confirmat
     private val viewBinding by viewBinding(FragmentEmailConfirmationBinding::bind)
 
     private val viewModel: EmailConfirmationViewModel by viewModels()
+
+    private lateinit var resendTimer: CountDownTimer
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,28 +36,34 @@ class EmailConfirmationFragment : BaseFragment(R.layout.fragment_email_confirmat
             findNavController().popBackStack()
         }
 
-        viewBinding.resendConfirmationCodeLinkButton.setOnClickListener {
-            viewBinding.resendConfirmationCodeLinkButton.isEnabled = false
-            createCodeConfirmationTimer(resources.getInteger(R.integer.resend_confirmation_code_time_span))
-        }
-        createCodeConfirmationTimer(resources.getInteger(R.integer.resend_confirmation_code_time_span))
-    }
-
-    private fun resetTimerText(seconds: Int) {
-        viewBinding.resendConfirmationCodeTimer.text =
-            resources.getString(R.string.confirmation_code_timer_template, seconds)
-    }
-
-    private fun createCodeConfirmationTimer(time: Int) {
-
-        object: CountDownTimer(time.toLong() * 1000, 1000) {
+        resendTimer = object: CountDownTimer(
+            resources.getInteger(R.integer.resend_confirmation_code_time_span).toLong() * 1000,
+            1000) {
 
             override fun onTick(millisUntilFinished: Long) {
                 resetTimerText((millisUntilFinished / 1000).toInt())
             }
             override fun onFinish() {
                 viewBinding.resendConfirmationCodeLinkButton.isEnabled = true
+                viewBinding.resendConfirmationCodeTimer.text =
+                    resources.getString(R.string.resend_confirmation_code_message)
             }
-        }.start()
+        }
+
+        viewBinding.resendConfirmationCodeLinkButton.setOnClickListener {
+            viewBinding.resendConfirmationCodeLinkButton.isEnabled = false
+            resendTimer.start()
+        }
+        resendTimer.start()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        resendTimer.cancel()
+    }
+
+    private fun resetTimerText(seconds: Int) {
+        viewBinding.resendConfirmationCodeTimer.text =
+            resources.getString(R.string.confirmation_code_timer_template, seconds)
     }
 }

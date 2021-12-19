@@ -70,7 +70,7 @@
 
     <Button
         android:id="@+id/signInButton"
-        style="@style/Widget.OurAwesomeApp.UpperButton"
+        style="@style/Widget.FirstAndroidApp.Button.Upper"
         android:text="@string/onboarding_sign_in_button_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
 
     <Button
         android:id="@+id/signUpButton"
-        style="@style/Widget.OurAwesomeApp.LowerButton"
+        style="@style/Widget.FirstAndroidApp.Button.Lower"
         android:text="@string/onboarding_sign_up_button_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -48,6 +48,7 @@
 
         <Button
             android:id="@+id/resendConfirmationCodeLinkButton"
+            style="@style/Widget.FirstAndroidApp.Button.Special"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:text="@string/resend_confirmation_code_template"
@@ -80,7 +81,7 @@
 
         <Button
             android:id="@+id/confirmCodeButton"
-            style="@style/Widget.OurAwesomeApp.UpperButton"
+            style="@style/Widget.FirstAndroidApp.Button.Upper"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
@@ -92,7 +93,7 @@
 
         <Button
             android:id="@+id/openMailApplicationButton"
-            style="@style/Widget.OurAwesomeApp.LowerButton"
+            style="@style/Widget.FirstAndroidApp.Button.Lower"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
