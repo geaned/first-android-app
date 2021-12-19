@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#FFCCCCCC</color>
     <color name="brand_blue">#FF127ABE</color>
+    <color name="color_post_like_border">#E39612</color>
 </resources>
