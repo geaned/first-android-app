@@ -34,8 +34,10 @@ import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
-    private val viewModel: SignUpViewModel by viewModels()
+
     private val viewBinding by viewBinding(FragmentSignUpBinding::bind)
+
+    private val viewModel: SignUpViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

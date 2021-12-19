@@ -35,4 +35,5 @@
     <string name="profile_logout_button_text">Выйти</string>
     <string name="logout_error_message">Что-то пошло не так</string>
     <string name="common_counter_prefix">+%1$d</string>
+    <string name="confirmation_code_timer_template">"Выслать код повторно можно будет через %1$d секунд"</string>
 </resources>
